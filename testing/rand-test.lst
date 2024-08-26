@@ -262,7 +262,7 @@ Disassembly of section .text:
  2be:	00d65363          	bge	a2,a3,2c4 <_write.constprop.0+0x3e>
  2c2:	471d                	li	a4,7
  2c4:	00027637          	lui	a2,0x27
- 2c8:	10160613          	addi	a2,a2,257 # 27101 <rand_test.c.ccfc4900+0x254ac>
+ 2c8:	10160613          	addi	a2,a2,257 # 27101 <rand_test.c.95f1082d+0x25477>
  2cc:	00032583          	lw	a1,0(t1)
  2d0:	0805f513          	andi	a0,a1,128
  2d4:	ed3d                	bnez	a0,352 <_write.constprop.0+0xcc>
@@ -350,7 +350,7 @@ Disassembly of section .text:
  3ac:	c110                	sw	a2,0(a0)
  3ae:	0511                	addi	a0,a0,4
  3b0:	feb54ee3          	blt	a0,a1,3ac <handle_reset+0x32>
- 3b4:	6e000513          	li	a0,1760
+ 3b4:	6f000513          	li	a0,1776
  3b8:	20000597          	auipc	a1,0x20000
  3bc:	c4858593          	addi	a1,a1,-952 # 20000000 <_lfsr>
  3c0:	80818613          	addi	a2,gp,-2040 # 20000008 <_ebss>
@@ -597,7 +597,7 @@ Disassembly of section .text:
  61a:	400217b7          	lui	a5,0x40021
  61e:	01080737          	lui	a4,0x1080
  622:	0007a223          	sw	zero,4(a5) # 40021004 <__global_pointer$+0x20020804>
- 626:	08170713          	addi	a4,a4,129 # 1080081 <rand_test.c.ccfc4900+0x107e42c>
+ 626:	08170713          	addi	a4,a4,129 # 1080081 <rand_test.c.95f1082d+0x107e3f7>
  62a:	c398                	sw	a4,0(a5)
  62c:	009f0737          	lui	a4,0x9f0
  630:	c798                	sw	a4,8(a5)
@@ -624,8 +624,8 @@ Disassembly of section .text:
  672:	8082                	ret
 
 00000674 <main>:
-
-
+	return r_output;
+}
 
 
 int main() 
@@ -635,62 +635,74 @@ int main()
  678:	c026                	sw	s1,0(sp)
  67a:	c406                	sw	ra,8(sp)
 	SystemInit();
- 67c:	0ff00413          	li	s0,255
- 680:	3f49                	jal	612 <SystemInit>
+ 67c:	4429                	li	s0,10
+ 67e:	3f51                	jal	612 <SystemInit>
 
 
-	for(int x = 0; x < 255; x++)
+	for(int x = 0; x < 10; x++)
 	{
 		printf("0x%08X\n",   _lfsr);
- 682:	200004b7          	lui	s1,0x20000
- 686:	0004a583          	lw	a1,0(s1) # 20000000 <_lfsr>
- 68a:	6cc00513          	li	a0,1740
- 68e:	3f05                	jal	5be <printf>
-	uint32_t bit_31 = _lfsr         & 0x80000000;
- 690:	0004a783          	lw	a5,0(s1)
-		printf("0x%08X\n\n", lfsr_next_msb());
- 694:	6d400513          	li	a0,1748
+ 680:	200004b7          	lui	s1,0x20000
+ 684:	0004a583          	lw	a1,0(s1) # 20000000 <_lfsr>
+ 688:	6dc00513          	li	a0,1756
+ 68c:	3f0d                	jal	5be <printf>
+	while(bits--)
+ 68e:	0004a703          	lw	a4,0(s1)
+		printf("0x%08X\n",   _lfsr);
+ 692:	02000613          	li	a2,32
+	uint32_t r_output = 0;
+ 696:	4581                	li	a1,0
+	return bit_31 ^ bit_21 ^ bit_01 ^ bit_00;
+ 698:	800006b7          	lui	a3,0x80000
 	uint32_t bit_01 = (_lfsr << 30) & 0x80000000;
- 698:	01e79713          	slli	a4,a5,0x1e
+ 69c:	01e71513          	slli	a0,a4,0x1e
 	uint32_t bit_21 = (_lfsr << 10) & 0x80000000;
- 69c:	00a79593          	slli	a1,a5,0xa
-	uint32_t new_bit = bit_31 ^ bit_21 ^ bit_01 ^ bit_00;
- 6a0:	8db9                	xor	a1,a1,a4
- 6a2:	8dbd                	xor	a1,a1,a5
- 6a4:	80000737          	lui	a4,0x80000
- 6a8:	8df9                	and	a1,a1,a4
+ 6a0:	00a71793          	slli	a5,a4,0xa
+	return bit_31 ^ bit_21 ^ bit_01 ^ bit_00;
+ 6a4:	8fa9                	xor	a5,a5,a0
+ 6a6:	8fb9                	xor	a5,a5,a4
 	uint32_t bit_00 = (_lfsr << 31) & 0x80000000;
- 6aa:	01f79713          	slli	a4,a5,0x1f
-	uint32_t new_bit = bit_31 ^ bit_21 ^ bit_01 ^ bit_00;
- 6ae:	8db9                	xor	a1,a1,a4
-	_lfsr = (_lfsr >> 1) | new_bit;
- 6b0:	8385                	srli	a5,a5,0x1
- 6b2:	8fcd                	or	a5,a5,a1
-	for(int x = 0; x < 255; x++)
- 6b4:	147d                	addi	s0,s0,-1
-	_lfsr = (_lfsr >> 1) | new_bit;
- 6b6:	00f4a023          	sw	a5,0(s1)
-		printf("0x%08X\n\n", lfsr_next_msb());
- 6ba:	3711                	jal	5be <printf>
-	for(int x = 0; x < 255; x++)
- 6bc:	f469                	bnez	s0,686 <main+0x12>
+ 6a8:	01f71513          	slli	a0,a4,0x1f
+	return bit_31 ^ bit_21 ^ bit_01 ^ bit_00;
+ 6ac:	8ff5                	and	a5,a5,a3
+ 6ae:	8fa9                	xor	a5,a5,a0
+		_lfsr = (_lfsr >> 1) | msb;
+ 6b0:	8305                	srli	a4,a4,0x1
+		r_output = r_output >> 1;
+ 6b2:	8185                	srli	a1,a1,0x1
+		_lfsr = (_lfsr >> 1) | msb;
+ 6b4:	8f5d                	or	a4,a4,a5
+		r_output |= msb;
+ 6b6:	8ddd                	or	a1,a1,a5
+	while(bits--)
+ 6b8:	fff60793          	addi	a5,a2,-1
+ 6bc:	0ff7f613          	zext.b	a2,a5
+ 6c0:	fe71                	bnez	a2,69c <main+0x28>
+		printf("0x%08X\n\n", rand());
+ 6c2:	6e400513          	li	a0,1764
+	for(int x = 0; x < 10; x++)
+ 6c6:	147d                	addi	s0,s0,-1
+ 6c8:	00e4a023          	sw	a4,0(s1)
+		printf("0x%08X\n\n", rand());
+ 6cc:	3dcd                	jal	5be <printf>
+	for(int x = 0; x < 10; x++)
+ 6ce:	f85d                	bnez	s0,684 <main+0x10>
 	}
 	return 0;
 }
- 6be:	40a2                	lw	ra,8(sp)
- 6c0:	4412                	lw	s0,4(sp)
- 6c2:	4482                	lw	s1,0(sp)
- 6c4:	4501                	li	a0,0
- 6c6:	0131                	addi	sp,sp,12
- 6c8:	8082                	ret
- 6ca:	0000                	unimp
- 6cc:	7830                	.insn	2, 0x7830
- 6ce:	3025                	jal	fffffef6 <__global_pointer$+0xdffff6f6>
- 6d0:	5838                	lw	a4,112(s0)
- 6d2:	000a                	c.slli	zero,0x2
- 6d4:	7830                	.insn	2, 0x7830
- 6d6:	3025                	jal	fffffefe <__global_pointer$+0xdffff6fe>
- 6d8:	5838                	lw	a4,112(s0)
- 6da:	0a0a                	slli	s4,s4,0x2
- 6dc:	0000                	unimp
+ 6d0:	40a2                	lw	ra,8(sp)
+ 6d2:	4412                	lw	s0,4(sp)
+ 6d4:	4482                	lw	s1,0(sp)
+ 6d6:	4501                	li	a0,0
+ 6d8:	0131                	addi	sp,sp,12
+ 6da:	8082                	ret
+ 6dc:	7830                	.insn	2, 0x7830
+ 6de:	3025                	jal	ffffff06 <__global_pointer$+0xdffff706>
+ 6e0:	5838                	lw	a4,112(s0)
+ 6e2:	000a                	c.slli	zero,0x2
+ 6e4:	7830                	.insn	2, 0x7830
+ 6e6:	3025                	jal	ffffff0e <__global_pointer$+0xdffff70e>
+ 6e8:	5838                	lw	a4,112(s0)
+ 6ea:	0a0a                	slli	s4,s4,0x2
+ 6ec:	0000                	unimp
 	...
