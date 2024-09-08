@@ -4,9 +4,9 @@ rand-test.elf:     file format elf32-littleriscv
 SYMBOL TABLE:
 00000000 l    d  .init	00000000 .init
 000000a0 l    d  .text	00000000 .text
-000006f0 l    d  .fini	00000000 .fini
+00000704 l    d  .fini	00000000 .fini
 20000000 l    d  .dalign	00000000 .dalign
-000006f0 l    d  .dlalign	00000000 .dlalign
+00000704 l    d  .dlalign	00000000 .dlalign
 20000000 l    d  .data	00000000 .data
 20000008 l    d  .bss	00000000 .bss
 00000000 l    d  .riscv.attributes	00000000 .riscv.attributes
@@ -25,7 +25,7 @@ SYMBOL TABLE:
 00000286 l     F .text	000000e0 _write.constprop.0
 00000366 l     F .text	00000014 __puts_uart
 0000040a l     F .text	000001b4 mini_vpprintf
-20000000 l     O .data	00000004 _lfsr
+20000000 l     O .data	00000004 _rand_lfsr
 00000000 l    df *ABS*	00000000 div.o
 000005be g     F .text	00000026 printf
 20000800 g       .data	00000000 __global_pointer$
@@ -39,7 +39,7 @@ SYMBOL TABLE:
 000005f6 g     F .text	0000001c memcpy
 00000000 g     F .init	0000009c InterruptVector
 000000a8 g     F .text	0000002c .hidden __hidden___udivsi3
-00000eb4  w      .debug_info	00000000 .hidden ch32v003fun.c.e79d1e91
+00000ec0  w      .debug_info	00000000 .hidden ch32v003fun.c.e79d1e91
 000000a8 g     F .text	0000002c .hidden __udivsi3
 000000a0 g       .init	00000000 _einit
 000003e8 g     F .text	00000002 SPI1_IRQHandler
@@ -52,15 +52,15 @@ SYMBOL TABLE:
 000000d4 g     F .text	00000008 .hidden __umodsi3
 000003e8 g     F .text	00000002 I2C1_EV_IRQHandler
 000003e8 g     F .text	00000002 DMA1_Channel6_IRQHandler
-00001c8a  w      .debug_info	00000000 .hidden rand_test.c.95f1082d
 000003e8 g     F .text	00000002 RCC_IRQHandler
+00001c96  w      .debug_info	00000000 .hidden rand_test.c.3b9b446c
 000003e8 g     F .text	00000002 TIM1_TRG_COM_IRQHandler
 000003e8 g     F .text	00000002 DMA1_Channel1_IRQHandler
 000003e8 g     F .text	00000002 DefaultIRQHandler
 20000000 g       .dalign	00000000 _data_vma
 000003ea g     F .text	0000000e NMI_RCC_CSS_IRQHandler
 000005e4 g     F .text	00000012 memset
-00000674 g     F .text	00000068 main
+00000674 g     F .text	00000076 main
 000003e8 g     F .text	00000002 DMA1_Channel5_IRQHandler
 000000a0 g     F .text	00000058 .hidden __divsi3
 00000612 g     F .text	00000062 SystemInit
@@ -73,7 +73,7 @@ SYMBOL TABLE:
 000003e8 g     F .text	00000002 SW_Handler
 000003e8 g     F .text	00000002 TIM1_BRK_IRQHandler
 20000008 g       .data	00000000 _edata
-000006f0 g       .dlalign	00000000 _data_lma
+00000704 g       .dlalign	00000000 _data_lma
 000000f8 g     F .text	00000024 .hidden __modsi3
 000003e8 g     F .text	00000002 DMA1_Channel2_IRQHandler
 0000037a g     F .text	0000006e handle_reset

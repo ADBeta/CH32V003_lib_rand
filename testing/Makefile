@@ -5,8 +5,6 @@ EXTRALIB_DIR := $(TOOLKIT_DIR)/extralibs
 # Project name
 TARGET := rand-test
 
-LIB_SRC := ../lib_rand.c
-
 # Change this to specify your MCU model, for compilation
 TARGET_MCU := CH32V003
 
