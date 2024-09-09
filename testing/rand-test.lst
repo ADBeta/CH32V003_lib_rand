@@ -262,7 +262,7 @@ Disassembly of section .text:
  2be:	00d65363          	bge	a2,a3,2c4 <_write.constprop.0+0x3e>
  2c2:	471d                	li	a4,7
  2c4:	00027637          	lui	a2,0x27
- 2c8:	10160613          	addi	a2,a2,257 # 27101 <rand_test.c.3b9b446c+0x2546b>
+ 2c8:	10160613          	addi	a2,a2,257 # 27101 <rand_test.c.570c40a0+0x2546b>
  2cc:	00032583          	lw	a1,0(t1)
  2d0:	0805f513          	andi	a0,a1,128
  2d4:	ed3d                	bnez	a0,352 <_write.constprop.0+0xcc>
@@ -597,7 +597,7 @@ Disassembly of section .text:
  61a:	400217b7          	lui	a5,0x40021
  61e:	01080737          	lui	a4,0x1080
  622:	0007a223          	sw	zero,4(a5) # 40021004 <__global_pointer$+0x20020804>
- 626:	08170713          	addi	a4,a4,129 # 1080081 <rand_test.c.3b9b446c+0x107e3eb>
+ 626:	08170713          	addi	a4,a4,129 # 1080081 <rand_test.c.570c40a0+0x107e3eb>
  62a:	c398                	sw	a4,0(a5)
  62c:	009f0737          	lui	a4,0x9f0
  630:	c798                	sw	a4,8(a5)
@@ -624,10 +624,10 @@ Disassembly of section .text:
  672:	8082                	ret
 
 00000674 <main>:
-#include "lib_rand.h"
 
 #include <stdio.h>
 
+// NOTE: RANDOM_STRENGTH is defined as 2 in funconfig.h. Change this if needed
 int main() 
 {
  674:	1141                	addi	sp,sp,-16
@@ -644,15 +644,15 @@ void seed(const uint32_t seed_val)
 	_rand_lfsr = seed_val;
  67e:	123457b7          	lui	a5,0x12345
  682:	20000437          	lui	s0,0x20000
- 686:	67878793          	addi	a5,a5,1656 # 12345678 <rand_test.c.3b9b446c+0x123439e2>
+ 686:	67878793          	addi	a5,a5,1656 # 12345678 <rand_test.c.570c40a0+0x123439e2>
  68a:	00f42023          	sw	a5,0(s0) # 20000000 <_rand_lfsr>
  68e:	4581                	li	a1,0
 	while(bits--)
  690:	00042703          	lw	a4,0(s0)
-	seed(0x12345678);
-
-	// Print 10 Random Numbers
-	for(uint8_t x = 0; x < 10; x++)
+	// *
+	// *
+	// *
+	for(uint8_t x = 0; x < 4; x++)
 	{
 		printf("Random Number %u: %lu\n", x, rand());
  694:	02000693          	li	a3,32
@@ -692,12 +692,13 @@ void seed(const uint32_t seed_val)
  6cc:	c02e                	sw	a1,0(sp)
  6ce:	00e42023          	sw	a4,0(s0)
  6d2:	35f5                	jal	5be <printf>
-	for(uint8_t x = 0; x < 10; x++)
+	for(uint8_t x = 0; x < 4; x++)
  6d4:	4582                	lw	a1,0(sp)
- 6d6:	47a9                	li	a5,10
+ 6d6:	4791                	li	a5,4
  6d8:	0585                	addi	a1,a1,1
  6da:	faf59be3          	bne	a1,a5,690 <main+0x1c>
-	}
+	
+	// TODO: Call seed in a loop
 
 
 	return 0;
@@ -711,7 +712,7 @@ void seed(const uint32_t seed_val)
  6ea:	0000                	unimp
  6ec:	6152                	.insn	2, 0x6152
  6ee:	646e                	.insn	2, 0x646e
- 6f0:	4e206d6f          	jal	s10,6bd2 <rand_test.c.3b9b446c+0x4f3c>
+ 6f0:	4e206d6f          	jal	s10,6bd2 <rand_test.c.570c40a0+0x4f3c>
  6f4:	6d75                	lui	s10,0x1d
  6f6:	6562                	.insn	2, 0x6562
  6f8:	2072                	.insn	2, 0x2072
