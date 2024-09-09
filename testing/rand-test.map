@@ -36,7 +36,6 @@ SYMBOL TABLE:
 000003ea g     F .text	0000000e NMI_Handler
 00000000 g     F .init	0000009c InterruptVectorDefault
 20000008 g       .bss	00000000 _sbss
-00001c96  w      .debug_info	00000000 .hidden rand_test.c.570c40a0
 000005f6 g     F .text	0000001c memcpy
 00000000 g     F .init	0000009c InterruptVector
 000000a8 g     F .text	0000002c .hidden __hidden___udivsi3
@@ -50,6 +49,7 @@ SYMBOL TABLE:
 000003e8 g     F .text	00000002 ADC1_IRQHandler
 20000008 g       .bss	00000000 _ebss
 000003e8 g     F .text	00000002 DMA1_Channel7_IRQHandler
+00001c96  w      .debug_info	00000000 .hidden rand_test.c.885f739a
 000000d4 g     F .text	00000008 .hidden __umodsi3
 000003e8 g     F .text	00000002 I2C1_EV_IRQHandler
 000003e8 g     F .text	00000002 DMA1_Channel6_IRQHandler
