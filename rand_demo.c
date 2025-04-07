@@ -4,7 +4,7 @@
 * See the GitHub for more information:
 * https://github.com/ADBeta/CH32V003_lib_rand
 *
-* Ver 2.0    09 Sep 2024
+* Ver 2.1    07 Apr 2025
 * 
 * Released under the MIT Licence
 * Copyright ADBeta (c) 2024
@@ -26,7 +26,7 @@
 * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE 
 * USE OR OTHER DEALINGS IN THE SOFTWARE.
 ******************************************************************************/
-#include "ch32v003fun.h"
+#include "ch32fun.h"
 #include "lib_rand.h"
 
 #include <stdio.h>
